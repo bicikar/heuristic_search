@@ -37,3 +37,12 @@ And a drawing of founded path:
 
 ![Пример отрисовки](/images/no-reop.jpeg)
 
+
+## 2. EES
+
+The central contribution of this paper is a new bounded sub-
+optimal search algorithm, Explicit Estimation Search (EES),
+that incorporates the objectives of bounded suboptimal search
+directly into its search order. Using $\hat{h}$ and $\hat{d}$ functions, it explicitly estimates the cost and distance-to-go for search guidance, relying on lower bounds solely for providing sub-optimality guarantees. 
+
+Implemented for a Vacuum world problem
