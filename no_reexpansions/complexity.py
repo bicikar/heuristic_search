@@ -18,6 +18,23 @@ steps[i] - набор не нормализованных значений ко�
 task_len[i] - набор нормализованных длин найденных путей для всех A* и WA* с заданными весами для текущего задания
 correct_tasks - подсчитывает количество найденных кратчайших путей для A* и WA* с заданными весами
 '''
+
+def make_path(goal):
+    '''
+    Creates a path by tracing parent pointers from the goal node to the start node
+    It also returns path's length.
+    '''
+
+    length = goal.g
+    current = goal
+    path = []
+    while current.parent:
+        path.append(current)
+        current = current.parent
+    path.append(current)
+    return path[::-1], length
+
+
 def count_complexity(task_map, scen, iter):
     nodes_norm = []
     nodes = []

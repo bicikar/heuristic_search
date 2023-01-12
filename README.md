@@ -15,34 +15,75 @@ This project uses Python and libraries:
 - pandas
 - Pillow
 
+All input files should be presented in `Data/` folder
+
 ## 1. Conditions for Avoiding Node Re-expansions in Bounded Suboptimal Search
 
 The main goal of this approach is to develop a set of conditions on the priority function used by a best-first search that ensures that the best-first search will find a bounded sub-optimal solution without re-expanding states. Two specific priority functions were developed from a larger class that have this property.
 
-### Input
+Algorithm runs WA* with three different priority functions:
+- $\Phi(x, y) = x + \frac{1}{w}\cdot y$
+- $\Phi_{XDP}(x, y) = \frac{1}{2w} \left( y + (2w-1)x + \sqrt{(y-x)^2} + 4wyx \right)$
+- $\Phi_{XUP} (x,y) = \frac{1}{2w}\left(y + x + \sqrt{(y+x)^2 + 4w(w-1)x^2}\right)$
+
+### 1.1 Path finding problem
+Run with command `python3 run_path file_name start_i start_j goal_i goal_j w`
 
 Search algorithms takes on input:
-- `grid_map` - path to `.map` and `.scen` files which decribe the field and the tasks. Examples can be seen in `Data/` folder. All maps and tasks were taken from the [website](https://movingai.com/benchmarks/grids.html)
+- `file_name` - path to the field file. Correct represenation of the file below.
 - `start_i, start_j` - starting position of the agent
 - `goal_i, goal_j` - ending postion of the agent
-- `w` - suboptimality bound
-- `heuristic_func` - admissible heuristic function. Example can be seen in `heuristics.py `
-- `search_tree` - searching tree. Default presented in `definitions.py`, 
-- `prioritet` - prioritet function. Examples presented in `heuristics.py`
+- `w` - suboptimality bound. If not presented then equals to 2
 
-As output:
-`path_was_found (True / False), ending_node, steps, nodes_created, opened_vertices, closed_vertices`
+Field represantation:
+```
+height *map_height*
+width *map_width*
+map
+*Map represtation*
+```
+Map representation consists of `*map_height*` rows, each of which contatins `*map_width*` symbols. Each symbol should be encoded as `@` for obstacle position and as `.` for free position
 
-And a drawing of founded path:
+#### Output:
+
+Algorithm returns statistic about each algorithm result.
+
+Drawn founded paths are saved in `result_path/` folder.
 
 ![Пример отрисовки](/images/no-reop.jpeg)
+
+### 1.2 15 puzzle problem
+Run with command `python3 run_puzzle file_name w`
+Search algorithms takes on input:
+- `file_name` - path to the field file. Correct represenation of the file below.
+- `w` - suboptimality bound. If not presented then equals to 2
+
+`file_name` should consist of 1 row with shifted numbers from 1 to $n^2$, where $n$ is the size of 15-puzzle. If 15-puzzle is not solvable, then the algorithm will panic. Example of `file_name` content:
+
+`11 12 1 10 9 6 2 5 3 4 16 15 14 8 7 13`
+
+#### Ouput:
+
+Algorithm returns statistic about each priority function result.
+
+The solution for each priority function is saved in result_puzzle 
+
 
 
 ## 2. EES
 
-The central contribution of this paper is a new bounded sub-
-optimal search algorithm, Explicit Estimation Search (EES),
-that incorporates the objectives of bounded suboptimal search
-directly into its search order. Using $\hat{h}$ and $\hat{d}$ functions, it explicitly estimates the cost and distance-to-go for search guidance, relying on lower bounds solely for providing sub-optimality guarantees. 
+Algotihm is implemented as standard Best First Search algorithm, but uses 3 queues with different metrics to take best node. Using $\hat{h}$ and $\hat{d}$ functions, it explicitly estimates the cost and distance-to-go for search guidance, relying on lower bounds solely for providing sub-optimality guarantees. 
 
-Implemented for a Vacuum world problem
+Implemented for a Vacuum world problem.
+
+Algorithm runs WA* with three different priority functions from part 1 of this repository and also runs EES algorithm.
+
+Run with command `python3 run_puzzle file_name start_i, start_j w gif_flag`
+
+Search algorithms takes on input:
+- `file_name` - path to the field file. Correct represenation of the file below.
+- `start_i, start_j` - starting position of the agent
+- `w` - suboptimality bound.
+- `gif_flag` - if set, then algorithms also draws gif's of how agent goes through the field. If not set, algorithm only presents final images with full path.
+
+

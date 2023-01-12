@@ -176,7 +176,7 @@ def EES(initial_state, grid_size, obstacles_positions, w, search_tree=SearchTree
     
     return False, None, None, steps, nodes_created
 
-def wastar(initial_state, grid_size, obstacles_positions, w, search_tree=SearchTreePQSWA, dist=diagonal_distance):
+def wastar(initial_state, grid_size, obstacles_positions, w, prioritet=phi, search_tree=SearchTreePQSWA, dist=diagonal_distance):
     ast = search_tree()
     steps = 0
     nodes_created = 0
@@ -184,7 +184,7 @@ def wastar(initial_state, grid_size, obstacles_positions, w, search_tree=SearchT
     h0 = mst_heuristic(initial_state, dist)
     
     cur = Node(initial_state, None, None, g=0, h=h0)
-    cur.f = cur.g + w * cur.h
+    cur.f = prioritet(cur.h, cur.g, w)
 
     ast.add_to_open(cur)
     nodes_created += 1
@@ -207,7 +207,7 @@ def wastar(initial_state, grid_size, obstacles_positions, w, search_tree=SearchT
             if not ast.was_expanded(child_node):
                 
                 child_node.h = mst_heuristic(child_node.state, dist)
-                child_node.f = child_node.g + w * child_node.h
+                child_node.f = prioritet(child_node.h, child_node.g, w)
                 # child_node.f_hat = child_node.g + child_node.h_hat
                 ast.add_to_open(child_node)
                 nodes_created += 1

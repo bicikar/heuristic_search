@@ -1,6 +1,15 @@
 
 import math
 
+def phi(x, y, w):
+    return y + w * x
+
+def phi_xdp(x, y, w):
+    return (y + (2 * w - 1) * x + math.sqrt((y-x) ** 2 + 4 * w * y * x)) / (2 * w)
+
+def phi_xup(x, y, w):
+    return (y + x + math.sqrt((y + x) ** 2 + 4 * w * (w-1) * x * x)) / (2 * w)
+
 def manhattan_distance(node):
     """Computes Manhattan distance between the vacuum cleaner and the first dirt position in the list.
 

@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 from heapq import heappop, heappush
+import os
 
 class Map:
 
@@ -100,7 +101,7 @@ def compute_cost(i1, j1, i2, j2):
         raise Exception('Trying to compute the cost of a non-supported move!')
 
 
-def draw(grid_map, start = None, goal = None, path = None, nodes_opened = None, nodes_expanded = None, nodes_reexpanded = None):
+def draw(grid_map, start = None, goal = None, name = 'tmp.png', path = None, nodes_opened = None, nodes_expanded = None, nodes_reexpanded = None):
     '''
     Auxiliary function that visualizes the environment, the path and 
     the open/expanded/re-expanded nodes.
@@ -108,7 +109,7 @@ def draw(grid_map, start = None, goal = None, path = None, nodes_opened = None, 
     The function assumes that nodes_opened/nodes_expanded/nodes_reexpanded
     are iterable collestions of SearchNodes
     '''
-    k = 30
+    k = 10
     height, width = grid_map.get_size()
     h_im = height * k
     w_im = width * k
@@ -141,20 +142,24 @@ def draw(grid_map, start = None, goal = None, path = None, nodes_opened = None, 
                     draw.rectangle((step.j * k, step.i * k, (step.j + 1) * k - 1, (step.i + 1) * k - 1), fill=(230, 126, 34), width=0)
 
     if (start is not None) and (grid_map.traversable(start.i, start.j)):
-        draw.rectangle((start.j * k, start.i * k, (start.j + 1) * k - 1, (start.i + 1) * k - 1), fill=(40, 180, 99), width=0)
+        draw.rectangle(((start.j - 1) * k, (start.i - 1) * k, (start.j + 2) * k - 1, (start.i + 2) * k - 1), fill=(40, 180, 99), width=0)
     
     if (goal is not None) and (grid_map.traversable(goal.i, goal.j)):
-        draw.rectangle((goal.j * k, goal.i * k, (goal.j + 1) * k - 1, (goal.i + 1) * k - 1), fill=(231, 76, 60), width=0)
+        draw.rectangle(((goal.j - 1) * k, (goal.i - 1) * k, (goal.j + 2) * k - 1, (goal.i + 2) * k - 1), fill=(231, 76, 60), width=100)
 
-
-    _, ax = plt.subplots(dpi=150)
+    
+    _, ax = plt.subplots(dpi=250)
     ax.axes.xaxis.set_visible(False)
     ax.axes.yaxis.set_visible(False)
     plt.imshow(np.asarray(im))
-    plt.show()
+    # plt.show()
+    dir = os.path.dirname(os.path.abspath(__file__))
+    im.save(dir + '/result/' + name, "PNG")
+    # plt.savefig(dir + '/result/' + name)
 
 def read_map_from_file(path):
-    with open(path) as f:
+    dir = os.path.dirname(os.path.abspath(__file__))
+    with open(dir + "/" + path) as f:
         f.readline()
         h = int(f.readline().split()[-1])
         w = int(f.readline().split()[-1])
@@ -173,8 +178,9 @@ def read_map_from_file(path):
 
 def read_tasks_from_file(path):
     tasks = []
+    dir = os.path.dirname(os.path.abspath(__file__))
 
-    with open(path) as f:
+    with open(dir + '/' + path) as f:
         f.readline()
         for line in f.readlines():
             line = line.split()
