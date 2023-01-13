@@ -1,4 +1,4 @@
-from complexity import *
+from no_reexpansions.complexity import *
 import sys
 import os
 import time

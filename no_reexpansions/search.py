@@ -1,5 +1,5 @@
-from definitions import *
-from map import *
+from no_reexpansions.definitions import *
+from no_reexpansions.map import *
 
 def astar(grid_map, start_i, start_j, goal_i, goal_j, w, heuristic_func = None, search_tree = None, prioritet=None):
     ast = search_tree()

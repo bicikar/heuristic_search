@@ -165,7 +165,7 @@ def draw(grid_map, start = None, name = 'tmp.png', path = None, nodes_opened = N
     # plt.imshow(np.asarray(im))
     # plt.show()
     dir = os.path.dirname(os.path.abspath(__file__))
-    im.save(dir + '/result_vacuum/' + name, "PNG")
+    im.save(dir + '/../result_vacuum/' + name, "PNG")
     grid_map.visited_draw.clear()
     # plt.savefig(dir + '/result_vacuum/' + name)
 
@@ -238,7 +238,7 @@ def make_gif(map, start, path, name='tmp'):
             map.visited_draw[' '.join(str(e) for e in step)] += 2
 
     dir = os.path.dirname(os.path.abspath(__file__))
-    images[0].save(dir + '/result_vacuum/' + name + '.gif', save_all=True, append_images=images[1:], duration=40, loop=0)
+    images[0].save(dir + '/../result_vacuum/' + name + '.gif', save_all=True, append_images=images[1:], duration=40, loop=0)
     map.visited_draw.clear()
 
 def read_map_from_file(path):

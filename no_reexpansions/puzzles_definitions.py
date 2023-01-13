@@ -259,6 +259,6 @@ def make_path(goal):
 def save_puzzle(path, name):
     dir = os.path.dirname(os.path.abspath(__file__))
 
-    with open(dir + "/result_puzzle/" + name, 'w') as f:
+    with open(dir + "/../result_puzzle/" + name, 'w') as f:
         for puzzle in path:
             print(puzzle.state, file=f)

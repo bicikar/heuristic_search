@@ -1,13 +1,9 @@
-from puzzles_definitions import *
-from map import *
-from heuristics import *
+from no_reexpansions.puzzles_definitions import *
+from no_reexpansions.map import *
+from no_reexpansions.heuristics import *
 import sys
 import os
 import time
-
-# draw(Berlin_map, None, None)
-
-# nodes_norm, steps_norm, tasks_hard, nodes, steps, task_lens, correct_tasks = count_complexity(Berlin_map, Berlin_scen, 7)
 
 if __name__ == '__main__':
     argc = len(sys.argv)

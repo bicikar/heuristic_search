@@ -154,7 +154,7 @@ def draw(grid_map, start = None, goal = None, name = 'tmp.png', path = None, nod
     plt.imshow(np.asarray(im))
     # plt.show()
     dir = os.path.dirname(os.path.abspath(__file__))
-    im.save(dir + '/result/' + name, "PNG")
+    im.save(dir + '/../result_path/' + name, "PNG")
     # plt.savefig(dir + '/result/' + name)
 
 def read_map_from_file(path):

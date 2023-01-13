@@ -1,9 +1,9 @@
 #inspired from https://github.com/jbnerd/Path_Planning_Agent/blob/master/Uninformed_Search/BFS.py
 from collections import deque
 import copy
-from definitions import *
+from EES.definitions import *
 import bisect
-from heuristcs import *
+from EES.heuristcs import *
 
 def write_solution(node):
     """Returns the sequence of actions and the cost once a solution has been found.
