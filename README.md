@@ -42,7 +42,7 @@ width *map_width*
 map
 *Map represtation*
 ```
-Map representation consists of `*map_height*` rows, each of which contatins `*map_width*` symbols. Each symbol should be encoded as `@` for obstacle position and as `.` for free position
+Map representation consists of `*map_height*` rows, each of which contatins `*map_width*` symbols. Each symbol should be encoded as `@` for obstacle position and as `.` for free position. Examples of maps can be downloaded [here](https://movingai.com/benchmarks/grids.html).
 
 #### Output:
 
