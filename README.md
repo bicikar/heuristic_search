@@ -62,7 +62,9 @@ Phi XUP summary, weight 2:
 Working time: 0.02333  ; Nodes created: 2944 ; Path length: 267.71782
 ```
 
-Drawn founded paths are saved in `result_path/` folder.
+Drawn found paths are saved in `result_path/` folder.
+
+Picture example:
 
 ![Пример отрисовки](/result_path/phi_xdp)
 
@@ -107,4 +109,4 @@ Algorithm returns small statistic about each priority function result.
 
 Pictures of the path are saved in `result_vacuum` directory. If `gif_flag` was active, animations will be saved in the same directory
 
-![Пример отрисовки](/result_vacuum/ees.gif)
+![Пример отрисовки](/result_vacuum/phi_xdp.gif)
